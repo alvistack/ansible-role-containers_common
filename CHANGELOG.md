@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Support CentOS 8
+
 ## 4.2.0 - 2020-04-03
 
   - Ininitial release for Ansible 2.9 or higher
