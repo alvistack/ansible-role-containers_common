@@ -4,7 +4,7 @@
 
 ### Major Changes
 
-  - Support CentOS 8
+  - Support CentOS/RHEL 8
 
 ## 4.2.0 - 2020-04-03
 
