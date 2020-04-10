@@ -6,6 +6,7 @@
 
   - Support CentOS/RHEL 8
   - Support Ubuntu 20.04
+  - Remove Ubuntu 16.04 support
 
 ## 4.2.0 - 2020-04-03
 
