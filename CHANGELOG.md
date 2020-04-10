@@ -5,6 +5,7 @@
 ### Major Changes
 
   - Support CentOS/RHEL 8
+  - Support Ubuntu 20.04
 
 ## 4.2.0 - 2020-04-03
 
