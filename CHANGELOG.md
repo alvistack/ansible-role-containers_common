@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Template `molecule -s default` with dummy docker driver
   - Support CentOS/RHEL 8
   - Support Ubuntu 20.04
   - Remove Ubuntu 16.04 support
