@@ -22,4 +22,4 @@ containers_common_apparmor_profile: "container-default"
 
 # Cgroup management implementation used for the runtime.
 # Valid options “systemd” or “cgroupfs”
-containers_common_cgroup_manager: "systemd"
+containers_common_cgroup_manager: "{{ _containers_common_cgroup_manager }}"
