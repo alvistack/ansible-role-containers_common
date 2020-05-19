@@ -56,11 +56,14 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
+    - { dest: "/etc/cni/net.d" }
     - { dest: "/etc/containers" }
     - { dest: "/etc/containers/certs.d" }
     - { dest: "/etc/containers/oci/hooks.d" }
     - { dest: "/etc/containers/registries.d" }
+    - { dest: "/opt/cni/bin" }
     - { dest: "/usr/share/containers" }
+    - { dest: "/usr/share/containers/oci/hooks.d" }
     - { dest: "/var/lib/containers/sigstore" }
   tags: containers_common
 
