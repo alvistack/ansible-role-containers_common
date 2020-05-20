@@ -1,11 +1,11 @@
 # {{ ansible_managed }}
 
 # The containers configuration file specifies all of the available configuration
-# command-line options/flags for container runtime tools like Podman & Buildah,
+# command-line options/flags for container engine tools like Podman & Buildah,
 # but in a TOML format that can be easily modified and versioned.
 
 # Please refer to containers.conf(5) for details of all configuration options.
-# Not all container tools implement all of the options.
+# Not all container engines implement all of the options.
 # All of the options have hard coded defaults and these options will override
 # the built in defaults. Users can then override these options via the command
 # line. Container engines will read containers.conf files in up to three
@@ -18,23 +18,30 @@
 
 [containers]
 
-# List of additional devices. Specified as
+# List of devices. Specified as
 # "<device-on-host>:<device-on-container>:<permissions>", for example:
 # "/dev/sdc:/dev/xvdc:rwm".
 # If it is empty or commented out, only the default devices will be used
 #
-# additional_devices = []
+devices = [
+]
 
-# List of additional volumes. Specified as
+# List of volumes. Specified as
 # "<directory-on-host>:<directory-in-container>:<options>", for example:
 # "/db:/var/lib/db:ro".
 # If it is empty or commented out, no volumes will be added
 #
-# additional_volumes = []
+# volumes = []
 
-# Used to change the name of the default AppArmor profile of container engines.
+# Used to change the name of the default AppArmor profile of container engine.
 #
-# apparmor_profile = "container-default"
+apparmor_profile = "{{ containers_common_apparmor_profile }}"
+
+# List of annotation. Specified as
+# "key=value"
+# If it is empty or commented out, no annotations will be added
+#
+# annotations = []
 
 # Default way to to create a cgroup namespace for the container
 # Options are:
@@ -43,37 +50,41 @@
 #
 # cgroupns = "private"
 
-# Cgroup management implementation used for the runtime.
-# Valid options “systemd” or “cgroupfs”
+# Control container cgroup configuration
+# Determines  whether  the  container will create CGroups.
+# Options are:
+# `enabled`   Enable cgroup support within container
+# `disabled`  Disable cgroup support, will inherit cgroups from parent
+# `no-conmon` Container engine runs run without conmon
 #
-# cgroup_manager = "systemd"
+# cgroups = "enabled"
 
 # List of default capabilities for containers. If it is empty or commented out,
 # the default capabilities defined in the container engine will be added.
 #
-# default_capabilities = [
-#    "AUDIT_WRITE",
-#    "CHOWN",
-#    "DAC_OVERRIDE",
-#    "FOWNER",
-#    "FSETID",
-#    "KILL",
-#    "MKNOD",
-#    "NET_BIND_SERVICE",
-#    "NET_RAW",
-#    "SETGID",
-#    "SETPCAP",
-#    "SETUID",
-#    "SYS_CHROOT",
-# ]
+default_capabilities = [
+    "AUDIT_WRITE",
+    "CHOWN",
+    "DAC_OVERRIDE",
+    "FOWNER",
+    "FSETID",
+    "KILL",
+    "MKNOD",
+    "NET_BIND_SERVICE",
+    "NET_RAW",
+    "SETFCAP",
+    "SETGID",
+    "SETPCAP",
+    "SETUID",
+    "SYS_CHROOT",
+]
 
-#  A list of sysctls to be set in containers by default,
+# A list of sysctls to be set in containers by default,
 # specified as "name=value",
 # for example:"net.ipv4.ping_group_range = 0 1000".
 #
-# default_sysctls = [
-#  "net.ipv4.ping_group_range=0 1000",
-# ]
+default_sysctls = [
+]
 
 # A list of ulimits to be set in containers by default, specified as
 # "<ulimit name>=<soft limit>:<hard limit>", for example:
@@ -84,7 +95,7 @@
 # Ulimits has limits for non privileged container engines.
 #
 # default_ulimits = [
-#  “nofile”=”1280:2560”,
+#     "nofile"="1280:2560",
 # ]
 
 # List of default DNS options to be added to /etc/resolv.conf inside of the container.
@@ -97,7 +108,7 @@
 
 # Set default DNS servers.
 # This option can be used to override the DNS configuration passed to the
-# container. The special value “none” can be specified to disable creation of
+# container. The special value "none" can be specified to disable creation of
 # /etc/resolv.conf in the container.
 # The /etc/resolv.conf file in the image will be used without changes.
 #
@@ -106,9 +117,9 @@
 # Environment variable list for the conmon process; used for passing necessary
 # environment variables to conmon or the runtime.
 #
-# env = [
-#    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-# ]
+env = [
+   "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+]
 
 # Pass all host environment variables into the container.
 #
@@ -116,9 +127,9 @@
 
 # Path to OCI hooks directories for automatically executed hooks.
 #
-# hooks_dir = [
-# “/usr/share/containers/oci/hooks.d”,
-# ]
+hooks_dir = [
+    "/usr/share/containers/oci/hooks.d",
+]
 
 # Default proxy environment variables passed into the container.
 # The environment variables passed in include:
@@ -133,7 +144,7 @@
 #
 # init = false
 
-#  Container init binary, if init=true, this is the init binary to be used for containers.
+# Container init binary, if init=true, this is the init binary to be used for containers.
 #
 # init_path = "/usr/libexec/podman/catatonit"
 
@@ -144,7 +155,8 @@
 #
 # ipcns = "private"
 
-# container engines use container separation using MAC(SELinux) labeling.
+# Flag tells container engine to whether to use container separation using
+# MAC(SELinux)labeling or not.
 # Flag is ignored on label disabled systems.
 #
 # label = true
@@ -168,14 +180,14 @@
 #
 # netns = "private"
 
-# Create /etc/hosts for the container.  By default, container engines manage
+# Create /etc/hosts for the container.  By default, container engine manage
 # /etc/hosts, automatically adding  the container's  own  IP  address.
 #
 # no_hosts = false
 
 # Maximum number of processes allowed in a container.
 #
-# pids_limit = 2048
+pids_limit = 2048
 
 # Default way to to create a PID namespace for the container
 # Options are:
@@ -187,7 +199,7 @@
 # Path to the seccomp.json profile which is used as the default seccomp profile
 # for the runtime.
 #
-# seccomp_profile = "/usr/share/containers/seccomp.json"
+seccomp_profile = "/usr/share/containers/seccomp.json"
 
 # Size of /dev/shm. Specified as <number><unit>.
 # Unit is optional, values:
@@ -211,7 +223,7 @@
 # userns = "host"
 
 # Number of UIDs to allocate for the automatic container creation.
-# UIDs are allocated from the “container” UIDs listed in
+# UIDs are allocated from the "container" UIDs listed in
 # /etc/subuid & /etc/subgid
 #
 # userns_size=65536
@@ -223,30 +235,37 @@
 
 # Path to directory where CNI plugin binaries are located.
 #
-# cni_plugin_dirs = ["/usr/libexec/cni"]
+cni_plugin_dirs = [
+    "/opt/cni/bin",
+]
 
 # Path to the directory where CNI configuration files are located.
 #
-# network_config_dir = "/etc/cni/net.d/"
+network_config_dir = "/etc/cni/net.d"
 
-[libpod]
+[engine]
+
+# Cgroup management implementation used for the runtime.
+# Valid options "systemd" or "cgroupfs"
+#
+cgroup_manager = "{{ containers_common_cgroup_manager }}"
 
 # Environment variables to pass into conmon
 #
-# conmon_env_vars = [
-#        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-# ]
+conmon_env_vars = [
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+]
 
 # Paths to look for the conmon container manager binary
 #
 # conmon_path = [
-#        "/usr/libexec/podman/conmon",
-#        "/usr/local/libexec/podman/conmon",
-#        "/usr/local/lib/podman/conmon",
-#        "/usr/bin/conmon",
-#        "/usr/sbin/conmon",
-#        "/usr/local/bin/conmon",
-#        "/usr/local/sbin/conmon"
+#     "/usr/libexec/podman/conmon",
+#     "/usr/local/libexec/podman/conmon",
+#     "/usr/local/lib/podman/conmon",
+#     "/usr/bin/conmon",
+#     "/usr/sbin/conmon",
+#     "/usr/local/bin/conmon",
+#     "/usr/local/sbin/conmon"
 # ]
 
 # Specify the keys sequence used to detach a container.
@@ -256,7 +275,7 @@
 #
 # detach_keys = "ctrl-p,ctrl-q"
 
-# Determines whether libpod will reserve ports on the host when they are
+# Determines whether engine will reserve ports on the host when they are
 # forwarded to containers. When enabled, when ports are forwarded to containers,
 # ports are held open by as long as the container is running, ensuring that
 # they cannot be reused by other programs on the host. However, this can cause
@@ -276,16 +295,16 @@
 
 # Default command to run the infra container
 #
-# infra_command = "/pause"
+infra_command = "/pause"
 
 # Infra (pause) container image name for pod infra containers.  When running a
 # pod, we start a `pause` process in a container to hold open the namespaces
 # associated with the  pod.  This container does nothing other then sleep,
 # reserving the pods resources for the lifetime of the pod.
 #
-# infra_image = "k8s.gcr.io/pause:3.1"
+infra_image = "k8s.gcr.io/pause:3.2"
 
-#  Specify the locking mechanism to use; valid values are "shm" and "file".
+# Specify the locking mechanism to use; valid values are "shm" and "file".
 # Change the default only if you are sure of what you are doing, in general
 # "file" is useful only on platforms where cgo is not available for using the
 # faster "shm" lock type.  You may need to run "podman system renumber" after
@@ -293,8 +312,8 @@
 #
 # lock_type** = "shm"
 
-# Default libpod namespace
-# If libpod is joined to a namespace, it will see only containers and pods
+# Default engine namespace
+# If engine is joined to a namespace, it will see only containers and pods
 # that were created in the same namespace, and will create new containers and
 # pods in that namespace.
 # The default namespace is "", which corresponds to no namespace. When no
@@ -304,7 +323,7 @@
 
 # Whether to use chroot instead of pivot_root in the runtime
 #
-# no_pivot_root = false
+no_pivot_root = false
 
 # Number of locks available for containers and pods.
 # If this is changed, a lock renumber must be performed (e.g. with the
@@ -312,7 +331,10 @@
 #
 # num_locks = 2048
 
-# Directory for persistent libpod files (database, etc)
+# Whether to pull new image before running a container
+# pull_policy = "missing"
+
+# Directory for persistent engine files (database, etc)
 # By default, this will be configured relative to where the containers/storage
 # stores containers
 # Uncomment to change location from this default
@@ -332,36 +354,58 @@
 
 # Default OCI runtime
 #
-# runtime = "runc"
+runtime = "{{ containers_common_runtime }}"
 
 # List of the OCI runtimes that support --format=json.  When json is supported
-# libpod will use it for reporting nicer errors.
+# engine will use it for reporting nicer errors.
 #
-# runtime_supports_json = ["crun", "runc"]
+# runtime_supports_json = ["crun", "runc", "kata"]
 
-# Paths to look for a valid OCI runtime (runc, runv, etc)
-[libpod.runtimes]
+# List of the OCI runtimes that supports running containers without cgroups.
+#
+# runtime_supports_nocgroups = ["crun"]
+
+# List of the OCI runtimes that supports running containers with KVM Separation.
+#
+# runtime_supports_kvm = ["kata"]
+
+# Paths to look for a valid OCI runtime (runc, runv, kata, etc)
+[engine.runtimes]
 # runc = [
-#        "/usr/bin/runc",
-#        "/usr/sbin/runc",
-#        "/usr/local/bin/runc",
-#        "/usr/local/sbin/runc",
-#        "/sbin/runc",
-#        "/bin/runc",
-#        "/usr/lib/cri-o-runc/sbin/runc",
+#     "/usr/bin/runc",
+#     "/usr/sbin/runc",
+#     "/usr/local/bin/runc",
+#     "/usr/local/sbin/runc",
+#     "/sbin/runc",
+#     "/bin/runc",
+#     "/usr/lib/cri-o-runc/sbin/runc",
 # ]
 
 # crun = [
-#            "/usr/bin/crun",
-#            "/usr/sbin/crun",
-#            "/usr/local/bin/crun",
-#            "/usr/local/sbin/crun",
-#            "/sbin/crun",
-#            "/bin/crun",
-#            "/run/current-system/sw/bin/crun",
+#         "/usr/bin/crun",
+#         "/usr/sbin/crun",
+#         "/usr/local/bin/crun",
+#         "/usr/local/sbin/crun",
+#         "/sbin/crun",
+#         "/bin/crun",
+#         "/run/current-system/sw/bin/crun",
 # ]
 
-# The [libpod.runtimes] table MUST be the last entry in this file.
+# kata = [
+#         "/usr/bin/kata-runtime",
+#         "/usr/sbin/kata-runtime",
+#         "/usr/local/bin/kata-runtime",
+#         "/usr/local/sbin/kata-runtime",
+#         "/sbin/kata-runtime",
+#         "/bin/kata-runtime",
+#         "/usr/bin/kata-qemu",
+#         "/usr/bin/kata-fc",
+# ]
+
+# Number of seconds to wait for container to exit before sending kill signal.
+#stop_timeout = 10
+
+# The [engine.runtimes] table MUST be the last entry in this file.
 # (Unless another table is added)
 # TOML does not provide a way to end a table other than a further table being
 # defined, so every key hereafter will be part of [runtimes] and not the main
