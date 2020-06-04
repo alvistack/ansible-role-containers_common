@@ -14,12 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Default OCI runtime
-containers_common_runtime: "runc"
-
 # Used to change the name of the default AppArmor profile of container engine.
-containers_common_apparmor_profile: "container-default"
+containers_common_containers_apparmor_profile: ""
+
+# Default OCI runtime
+containers_common_engine_runtime: "crun"
 
 # Cgroup management implementation used for the runtime.
 # Valid options “systemd” or “cgroupfs”
-containers_common_cgroup_manager: "systemd"
+containers_common_engine_cgroup_manager: "systemd"
+
+# Default Storage Driver
+containers_common_storage_driver: "overlay"
