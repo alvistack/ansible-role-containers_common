@@ -35,7 +35,7 @@ devices = [
 
 # Used to change the name of the default AppArmor profile of container engine.
 #
-apparmor_profile = "{{ containers_common_apparmor_profile }}"
+apparmor_profile = "{{ containers_common_containers_apparmor_profile }}"
 
 # List of annotation. Specified as
 # "key=value"
@@ -248,7 +248,7 @@ network_config_dir = "/etc/cni/net.d"
 # Cgroup management implementation used for the runtime.
 # Valid options "systemd" or "cgroupfs"
 #
-cgroup_manager = "{{ containers_common_cgroup_manager }}"
+cgroup_manager = "{{ containers_common_engine_cgroup_manager }}"
 
 # Environment variables to pass into conmon
 #
@@ -354,7 +354,7 @@ no_pivot_root = false
 
 # Default OCI runtime
 #
-runtime = "{{ containers_common_runtime }}"
+runtime = "{{ containers_common_engine_runtime }}"
 
 # List of the OCI runtimes that support --format=json.  When json is supported
 # engine will use it for reporting nicer errors.
