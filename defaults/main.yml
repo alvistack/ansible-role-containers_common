@@ -18,7 +18,14 @@
 containers_common_containers_apparmor_profile: ""
 
 # Default OCI runtime
-containers_common_engine_runtime: "crun"
+containers_common_engine_runtime: >-
+  {%- set _params = '' -%}
+  {%- if "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}" == "redhat-7" -%}
+  {%-   set _params = 'runc' -%}
+  {%- else -%}
+  {%-   set _params = 'crun' -%}
+  {%- endif -%}
+  {{ _params }}
 
 # Cgroup management implementation used for the runtime.
 # Valid options “systemd” or “cgroupfs”
