@@ -386,7 +386,7 @@ runtime = "{{ containers_common_engine_runtime }}"
 # List of the OCI runtimes that support --format=json.  When json is supported
 # engine will use it for reporting nicer errors.
 #
-# runtime_supports_json = ["crun", "runc", "kata-runtime"]
+# runtime_supports_json = ["crun", "runc", "kata"]
 
 # List of the OCI runtimes that supports running containers without cgroups.
 #
@@ -394,7 +394,7 @@ runtime = "{{ containers_common_engine_runtime }}"
 
 # List of the OCI runtimes that supports running containers with KVM Separation.
 #
-# runtime_supports_kvm = ["kata-runtime"]
+# runtime_supports_kvm = ["kata"]
 
 # Number of seconds to wait for container to exit before sending kill signal.
 # stop_timeout = 10
@@ -415,36 +415,38 @@ runtime = "{{ containers_common_engine_runtime }}"
 #     Path to file containing ssh identity key
 #     identity = "~/.ssh/id_rsa"
 
-# Paths to look for a valid OCI runtime (runc, runv, kata-runtime, etc)
+# Paths to look for a valid OCI runtime (runc, runv, kata, etc)
 [engine.runtimes]
-{% if containers_common_engine_runtime == 'runc' -%}
-runc = [
-    "/usr/bin/runc",
-    "/usr/sbin/runc",
-    "/usr/local/bin/runc",
-    "/usr/local/sbin/runc",
-    "/sbin/runc",
-    "/bin/runc",
-]
-{% elif containers_common_engine_runtime == 'crun' %}
-crun = [
-    "/usr/bin/crun",
-    "/usr/sbin/crun",
-    "/usr/local/bin/crun",
-    "/usr/local/sbin/crun",
-    "/sbin/crun",
-    "/bin/crun",
-]
-{% elif containers_common_engine_runtime == 'kata-runtime' %}
-kata-runtime = [
-    "/usr/bin/kata-runtime",
-    "/usr/sbin/kata-runtime",
-    "/usr/local/bin/kata-runtime",
-    "/usr/local/sbin/kata-runtime",
-    "/sbin/kata-runtime",
-    "/bin/kata-runtime",
-]
-{%- endif %}
+# runc = [
+#     "/usr/bin/runc",
+#     "/usr/sbin/runc",
+#     "/usr/local/bin/runc",
+#     "/usr/local/sbin/runc",
+#     "/sbin/runc",
+#     "/bin/runc",
+#     "/usr/lib/cri-o-runc/sbin/runc",
+# ]
+
+# crun = [
+#         "/usr/bin/crun",
+#         "/usr/sbin/crun",
+#         "/usr/local/bin/crun",
+#         "/usr/local/sbin/crun",
+#         "/sbin/crun",
+#         "/bin/crun",
+#         "/run/current-system/sw/bin/crun",
+# ]
+
+# kata = [
+#         "/usr/bin/kata-runtime",
+#         "/usr/sbin/kata-runtime",
+#         "/usr/local/bin/kata-runtime",
+#         "/usr/local/sbin/kata-runtime",
+#         "/sbin/kata-runtime",
+#         "/bin/kata-runtime",
+#         "/usr/bin/kata-qemu",
+#         "/usr/bin/kata-fc",
+# ]
 
 
 # The [engine.runtimes] table MUST be the last entry in this file.
