@@ -75,12 +75,11 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
+    - { dest: "/etc/containers/containers.conf" }
     - { dest: "/etc/containers/policy.json" }
     - { dest: "/etc/containers/registries.conf" }
     - { dest: "/etc/containers/registries.d/default.yaml" }
     - { dest: "/etc/containers/storage.conf" }
-    - { dest: "/usr/share/containers/containers.conf" }
-    - { dest: "/usr/share/containers/mounts.conf" }
     - { dest: "/usr/share/containers/seccomp.json" }
   tags: containers_common
 
@@ -92,11 +91,10 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
+    - { dest: "/etc/containers/containers.conf" }
     - { dest: "/etc/containers/policy.json" }
     - { dest: "/etc/containers/registries.conf" }
     - { dest: "/etc/containers/registries.d/default.yaml" }
     - { dest: "/etc/containers/storage.conf" }
-    - { dest: "/usr/share/containers/containers.conf" }
-    - { dest: "/usr/share/containers/mounts.conf" }
     - { dest: "/usr/share/containers/seccomp.json" }
   tags: containers_common
