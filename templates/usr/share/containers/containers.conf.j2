@@ -125,12 +125,6 @@ env = [
 #
 # env_host = false
 
-# Path to OCI hooks directories for automatically executed hooks.
-#
-hooks_dir = [
-    "/usr/share/containers/oci/hooks.d",
-]
-
 # Default proxy environment variables passed into the container.
 # The environment variables passed in include:
 # http_proxy, https_proxy, ftp_proxy, no_proxy, and the upper case versions of
@@ -208,6 +202,15 @@ seccomp_profile = "/usr/share/containers/seccomp.json"
 #
 # shm_size = "65536k"
 
+# Set timezone in container. Takes IANA timezones as well as "local",
+# which sets the timezone in the container to match the host machine.
+#
+# tz = ""
+
+# Set umask inside the container
+#
+# umask="0022"
+
 # Default way to to create a UTS namespace for the container
 # Options are:
 # `private`        Create private UTS Namespace for the container.
@@ -253,7 +256,7 @@ cgroup_manager = "{{ containers_common_engine_cgroup_manager }}"
 # Environment variables to pass into conmon
 #
 conmon_env_vars = [
-    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
 ]
 
 # Paths to look for the conmon container manager binary
@@ -284,10 +287,24 @@ conmon_env_vars = [
 #
 # enable_port_reservation = true
 
+# Environment variables to be used when running the container engine (e.g., Podman, Buildah).
+# For example "http_proxy=internal.proxy.company.com".
+# Note these environment variables will not be used within the container.
+# Set the env section under [containers] table, if you want to set environment variables for the container.
+env = [
+   "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+]
+
 # Selects which logging mechanism to use for container engine events.
 # Valid values are `journald`, `file` and `none`.
 #
 # events_logger = "journald"
+
+# Path to OCI hooks directories for automatically executed hooks.
+#
+hooks_dir = [
+    "/usr/share/containers/oci/hooks.d",
+]
 
 # Default transport method for pulling and pushing for images
 #
@@ -312,6 +329,12 @@ infra_image = "k8s.gcr.io/pause:3.2"
 #
 # lock_type** = "shm"
 
+# MultiImageArchive - if true, the container engine allows for storing archives
+# (e.g., of the docker-archive transport) with multiple images.  By default,
+# Podman creates single-image archives.
+#
+# multi_image_archive = "false"
+
 # Default engine namespace
 # If engine is joined to a namespace, it will see only containers and pods
 # that were created in the same namespace, and will create new containers and
@@ -320,6 +343,10 @@ infra_image = "k8s.gcr.io/pause:3.2"
 # namespace is set, all containers and pods are visible.
 #
 # namespace = ""
+
+# Path to the slirp4netns binary
+#
+# network_cmd_path=""
 
 # Whether to use chroot instead of pivot_root in the runtime
 #
@@ -359,7 +386,7 @@ runtime = "{{ containers_common_engine_runtime }}"
 # List of the OCI runtimes that support --format=json.  When json is supported
 # engine will use it for reporting nicer errors.
 #
-# runtime_supports_json = ["crun", "runc", "kata"]
+# runtime_supports_json = ["crun", "runc", "kata-runtime"]
 
 # List of the OCI runtimes that supports running containers without cgroups.
 #
@@ -367,43 +394,58 @@ runtime = "{{ containers_common_engine_runtime }}"
 
 # List of the OCI runtimes that supports running containers with KVM Separation.
 #
-# runtime_supports_kvm = ["kata"]
-
-# Paths to look for a valid OCI runtime (runc, runv, kata, etc)
-[engine.runtimes]
-# runc = [
-#     "/usr/bin/runc",
-#     "/usr/sbin/runc",
-#     "/usr/local/bin/runc",
-#     "/usr/local/sbin/runc",
-#     "/sbin/runc",
-#     "/bin/runc",
-#     "/usr/lib/cri-o-runc/sbin/runc",
-# ]
-
-# crun = [
-#         "/usr/bin/crun",
-#         "/usr/sbin/crun",
-#         "/usr/local/bin/crun",
-#         "/usr/local/sbin/crun",
-#         "/sbin/crun",
-#         "/bin/crun",
-#         "/run/current-system/sw/bin/crun",
-# ]
-
-# kata = [
-#         "/usr/bin/kata-runtime",
-#         "/usr/sbin/kata-runtime",
-#         "/usr/local/bin/kata-runtime",
-#         "/usr/local/sbin/kata-runtime",
-#         "/sbin/kata-runtime",
-#         "/bin/kata-runtime",
-#         "/usr/bin/kata-qemu",
-#         "/usr/bin/kata-fc",
-# ]
+# runtime_supports_kvm = ["kata-runtime"]
 
 # Number of seconds to wait for container to exit before sending kill signal.
-#stop_timeout = 10
+# stop_timeout = 10
+
+# Index to the active service
+# active_service = production
+
+# map of service destinations
+# [service_destinations]
+#   [service_destinations.production]
+#     URI to access the Podman service
+#     Examples:
+#       rootless "unix://run/user/$UID/podman/podman.sock" (Default)
+#       rootfull "unix://run/podman/podman.sock (Default)
+#       remote rootless ssh://engineering.lab.company.com/run/user/1000/podman/podman.sock
+#       remote rootfull ssh://root@10.10.1.136:22/run/podman/podman.sock
+#     uri="ssh://user@production.example.com/run/user/1001/podman/podman.sock"
+#     Path to file containing ssh identity key
+#     identity = "~/.ssh/id_rsa"
+
+# Paths to look for a valid OCI runtime (runc, runv, kata-runtime, etc)
+[engine.runtimes]
+{% if containers_common_engine_runtime == 'runc' -%}
+runc = [
+    "/usr/bin/runc",
+    "/usr/sbin/runc",
+    "/usr/local/bin/runc",
+    "/usr/local/sbin/runc",
+    "/sbin/runc",
+    "/bin/runc",
+]
+{% elif containers_common_engine_runtime == 'crun' %}
+crun = [
+    "/usr/bin/crun",
+    "/usr/sbin/crun",
+    "/usr/local/bin/crun",
+    "/usr/local/sbin/crun",
+    "/sbin/crun",
+    "/bin/crun",
+]
+{% elif containers_common_engine_runtime == 'kata-runtime' %}
+kata-runtime = [
+    "/usr/bin/kata-runtime",
+    "/usr/sbin/kata-runtime",
+    "/usr/local/bin/kata-runtime",
+    "/usr/local/sbin/kata-runtime",
+    "/sbin/kata-runtime",
+    "/bin/kata-runtime",
+]
+{%- endif %}
+
 
 # The [engine.runtimes] table MUST be the last entry in this file.
 # (Unless another table is added)

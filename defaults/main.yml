@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Used to change the name of the default AppArmor profile of container engine.
-containers_common_containers_apparmor_profile: ""
+containers_common_containers_apparmor_profile: "container-default"
 
 # Default OCI runtime
 containers_common_engine_runtime: "crun"
