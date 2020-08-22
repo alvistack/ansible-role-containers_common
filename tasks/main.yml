@@ -96,5 +96,7 @@
     - { dest: "/etc/containers/registries.conf" }
     - { dest: "/etc/containers/registries.d/default.yaml" }
     - { dest: "/etc/containers/storage.conf" }
+    - { dest: "/usr/share/containers/containers.conf", state: "absent" }
+    - { dest: "/usr/share/containers/mounts.conf", state: "absent" }
     - { dest: "/usr/share/containers/seccomp.json" }
   tags: containers_common
