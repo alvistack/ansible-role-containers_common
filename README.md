@@ -1,7 +1,7 @@
 # Ansible Role for Containers Common Configuration Files
 
 [![Travis](https://img.shields.io/travis/com/alvistack/ansible-role-containers_common.svg)](https://travis-ci.com/alvistack/ansible-role-containers_common)
-[![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-containers_common.svg)](https://github.com/alvistack/ansible-role-containers_common)
+[![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-containers_common.svg)](https://github.com/alvistack/ansible-role-containers_common/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-containers_common.svg)](https://github.com/alvistack/ansible-role-containers_common/blob/master/LICENSE)
 [![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.containers_common-blue.svg)](https://galaxy.ansible.com/alvistack/containers_common)
 
