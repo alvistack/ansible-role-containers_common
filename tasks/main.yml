@@ -16,7 +16,6 @@
 
 - name: include default variables
   include_vars: "../vars/main.yml"
-  tags: containers_common
 
 - name: include release specific variables
   include_vars: "{{ lookup('first_found', _params) }}"
@@ -31,7 +30,6 @@
       paths:
         - "../vars"
   ignore_errors: true
-  tags: containers_common
 
 - name: include release specific tasks
   include_tasks: "{{ lookup('first_found', _params) }}"
@@ -46,7 +44,6 @@
       paths:
         - "."
   ignore_errors: true
-  tags: containers_common
 
 - name: prepare directories
   file:
@@ -65,7 +62,6 @@
     - { dest: "/usr/share/containers" }
     - { dest: "/usr/share/containers/oci/hooks.d" }
     - { dest: "/var/lib/containers/sigstore" }
-  tags: containers_common
 
 - name: copy templates
   template:
@@ -81,7 +77,6 @@
     - { dest: "/etc/containers/registries.d/default.yaml" }
     - { dest: "/etc/containers/storage.conf" }
     - { dest: "/usr/share/containers/seccomp.json" }
-  tags: containers_common
 
 - name: prepare files
   file:
@@ -99,4 +94,3 @@
     - { dest: "/usr/share/containers/containers.conf", state: "absent" }
     - { dest: "/usr/share/containers/mounts.conf", state: "absent" }
     - { dest: "/usr/share/containers/seccomp.json" }
-  tags: containers_common
