@@ -26,3 +26,9 @@ containers_common_engine_cgroup_manager: "systemd"
 
 # Default Storage Driver
 containers_common_storage_driver: "overlay"
+
+# Default Storage Mount Program
+containers_common_storage_mount_program: ""
+
+# Default Storage Mount Options
+containers_common_storage_mountopt: ""
