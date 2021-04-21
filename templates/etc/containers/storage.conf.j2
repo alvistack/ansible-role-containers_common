@@ -73,10 +73,13 @@ additionalimagestores = [
 
 # Path to an helper program to use for mounting the file system instead of mounting it
 # directly.
+{% if containers_common_storage_mount_program is defined and containers_common_storage_mount_program|length %}
+mount_program = "{{ containers_common_storage_mount_program }}"
+{% else %}
 #mount_program = "/usr/bin/fuse-overlayfs"
-
+{% endif %}
 # mountopt specifies comma separated list of extra mount options
-mountopt = ""
+mountopt = "{{containers_common_storage_mountopt}}"
 
 # Set to skip a PRIVATE bind mount on the storage home directory.
 # skip_mount_home = "false"
