@@ -18,7 +18,7 @@
 containers_common_containers_apparmor_profile: ""
 
 # Default OCI runtime
-containers_common_engine_runtime: "runc"
+containers_common_engine_runtime: "crun"
 
 # Cgroup management implementation used for the runtime.
 # Valid options “systemd” or “cgroupfs”
@@ -27,8 +27,10 @@ containers_common_engine_cgroup_manager: "systemd"
 # Default Storage Driver
 containers_common_storage_driver: "overlay"
 
-# Default Storage Mount Program
-containers_common_storage_mount_program: ""
+# Path to an helper program to use for mounting the file system instead of mounting it
+# directly.
+containers_common_storage_options_overlay_mount_program: "/usr/bin/fuse-overlayfs"
 
-# Default Storage Mount Options
-containers_common_storage_mountopt: ""
+# mountopt specifies comma separated list of extra mount options
+containers_common_storage_options_overlay_mountopt: ""
+
