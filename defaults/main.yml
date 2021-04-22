@@ -33,4 +33,3 @@ containers_common_storage_options_overlay_mount_program: "/usr/bin/fuse-overlayf
 
 # mountopt specifies comma separated list of extra mount options
 containers_common_storage_options_overlay_mountopt: ""
-
