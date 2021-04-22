@@ -59,9 +59,44 @@
     - { dest: "/etc/containers/oci/hooks.d" }
     - { dest: "/etc/containers/registries.d" }
     - { dest: "/opt/cni/bin" }
+    - { dest: "/usr/local/bin" }
     - { dest: "/usr/share/containers" }
     - { dest: "/usr/share/containers/oci/hooks.d" }
     - { dest: "/var/lib/containers/sigstore" }
+
+- name: download archive
+  shell: |
+    set -euo pipefail
+    TMP_DIR="$(mktemp -d)" \
+      && cd $TMP_DIR \
+      && mkdir -p ./{{ item.dest | dirname }} \
+      && curl -skL -m 300 {{ item.url }} > ./{{ item.dest }} \
+      && echo -n "{{ item.sha256sum }} ./{{ item.dest }}" | sha256sum -c - \
+      && mkdir -p {{ item.dest | dirname }} \
+      && mv ./{{ item.dest }} {{ item.dest }} \
+      && rm -rf $TMP_DIR
+  args:
+    executable: "/bin/bash"
+    creates: "{{ item.dest | dirname }}"
+  loop:
+    - "{{ fuse_overlayfs_download }}"
+  register: result
+  until: result is succeeded
+
+- name: unarchive package
+  shell: |
+    set -euo pipefail
+    exec &> >(tee -a {{ fuse_overlayfs_download.dest }}.log)
+    cd /usr/local/bin
+    TMP_DIR="$(mktemp -d)" \
+      && cp {{ fuse_overlayfs_download.dest }} $TMP_DIR/fuse-overlayfs \
+      && chown root:root $TMP_DIR/fuse-overlayfs \
+      && chmod 0755 $TMP_DIR/fuse-overlayfs \
+      && mv $TMP_DIR/fuse-overlayfs . \
+      && rm -rf $TMP_DIR
+  args:
+    executable: "/bin/bash"
+    creates: "{{ fuse_overlayfs_download.dest }}.log"
 
 - name: copy templates
   template:
@@ -91,6 +126,7 @@
     - { dest: "/etc/containers/registries.conf" }
     - { dest: "/etc/containers/registries.d/default.yaml" }
     - { dest: "/etc/containers/storage.conf" }
+    - { dest: "/usr/local/bin/fuse-overlayfs", mode: "0755" }
     - { dest: "/usr/share/containers/containers.conf", state: "absent" }
     - { dest: "/usr/share/containers/mounts.conf", state: "absent" }
     - { dest: "/usr/share/containers/seccomp.json" }

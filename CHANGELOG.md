@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Support `fuse-overlayfs`
   - Support Fedora 34
   - Support Ubuntu 21.04
 
