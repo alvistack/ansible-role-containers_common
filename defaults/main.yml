@@ -14,11 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# fuse-overlayfs version.
+fuse_overlayfs_version: "v1.5.0"
+
+# fuse-overlayfs download details.
+fuse_overlayfs_download: "{{ _fuse_overlayfs_download[fuse_overlayfs_version] }}"
+
 # Used to change the name of the default AppArmor profile of container engine.
 containers_common_containers_apparmor_profile: ""
 
 # Default OCI runtime
-containers_common_engine_runtime: "runc"
+containers_common_engine_runtime: "crun"
 
 # Cgroup management implementation used for the runtime.
 # Valid options “systemd” or “cgroupfs”
@@ -26,3 +32,10 @@ containers_common_engine_cgroup_manager: "systemd"
 
 # Default Storage Driver
 containers_common_storage_driver: "overlay"
+
+# Path to an helper program to use for mounting the file system instead of mounting it
+# directly.
+containers_common_storage_options_overlay_mount_program: "/usr/local/bin/fuse-overlayfs"
+
+# mountopt specifies comma separated list of extra mount options
+containers_common_storage_options_overlay_mountopt: ""
