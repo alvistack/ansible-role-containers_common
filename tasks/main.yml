@@ -133,6 +133,4 @@
     - { dest: "/etc/containers/registries.d/default.yaml" }
     - { dest: "/etc/containers/storage.conf" }
     - { dest: "/usr/local/bin/fuse-overlayfs", mode: "0755" }
-    - { dest: "/usr/share/containers/containers.conf", state: "absent" }
-    - { dest: "/usr/share/containers/mounts.conf", state: "absent" }
     - { dest: "/usr/share/containers/seccomp.json" }
