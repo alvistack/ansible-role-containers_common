@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+_fuse_overlayfs_version:
+  "v1.5": "v1.5.0"
+
 _fuse_overlayfs_download:
   "v1.5.0":
     url: "http://github.com/containers/fuse-overlayfs/releases/download/v1.5.0/fuse-overlayfs-x86_64"
