@@ -14,8 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# fuse-overlayfs release.
+fuse_overlayfs_release: "v1.5"
+
 # fuse-overlayfs version.
-fuse_overlayfs_version: "v1.5.0"
+fuse_overlayfs_version: "{{ _fuse_overlayfs_version[fuse_overlayfs_release] }}"
 
 # fuse-overlayfs download details.
 fuse_overlayfs_download: "{{ _fuse_overlayfs_download[fuse_overlayfs_version] }}"
