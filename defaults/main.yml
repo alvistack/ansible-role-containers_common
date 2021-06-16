@@ -14,15 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# fuse-overlayfs release.
-fuse_overlayfs_release: "v1.5"
-
-# fuse-overlayfs version.
-fuse_overlayfs_version: "{{ _fuse_overlayfs_version[fuse_overlayfs_release] }}"
-
-# fuse-overlayfs download details.
-fuse_overlayfs_download: "{{ _fuse_overlayfs_download[fuse_overlayfs_version] }}"
-
 # Used to change the name of the default AppArmor profile of container engine.
 containers_common_containers_apparmor_profile: ""
 
