@@ -20,8 +20,13 @@
   tasks:
     - name: include role
       include_role:
-        name: fuse_overlayfs
-      tags: fuse_overlayfs
+        name: runc
+      tags: runc
+
+    - name: include role
+      include_role:
+        name: crun
+      tags: crun
 
     - name: include role
       include_role:

@@ -29,7 +29,7 @@ containers_common_storage_driver: "overlay"
 
 # Path to an helper program to use for mounting the file system instead of mounting it
 # directly.
-containers_common_storage_options_overlay_mount_program: "/usr/local/bin/fuse-overlayfs"
+containers_common_storage_options_overlay_mount_program: "/usr/bin/fuse-overlayfs"
 
 # mountopt specifies comma separated list of extra mount options
 containers_common_storage_options_overlay_mountopt: ""

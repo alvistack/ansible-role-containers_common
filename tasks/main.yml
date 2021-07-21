@@ -61,15 +61,8 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
-    - { dest: "/etc/cni/net.d" }
     - { dest: "/etc/containers" }
-    - { dest: "/etc/containers/certs.d" }
-    - { dest: "/etc/containers/oci/hooks.d" }
-    - { dest: "/etc/containers/registries.d" }
-    - { dest: "/opt/cni/bin" }
     - { dest: "/usr/share/containers" }
-    - { dest: "/usr/share/containers/oci/hooks.d" }
-    - { dest: "/var/lib/containers/sigstore" }
 
 - name: copy templates
   template:
@@ -79,12 +72,8 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/etc/containers/containers.conf" }
-    - { dest: "/etc/containers/policy.json" }
-    - { dest: "/etc/containers/registries.conf" }
-    - { dest: "/etc/containers/registries.d/default.yaml" }
     - { dest: "/etc/containers/storage.conf" }
-    - { dest: "/usr/share/containers/seccomp.json" }
+    - { dest: "/usr/share/containers/containers.conf" }
 
 - name: prepare files
   file:
@@ -94,9 +83,5 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/etc/containers/containers.conf" }
-    - { dest: "/etc/containers/policy.json" }
-    - { dest: "/etc/containers/registries.conf" }
-    - { dest: "/etc/containers/registries.d/default.yaml" }
     - { dest: "/etc/containers/storage.conf" }
-    - { dest: "/usr/share/containers/seccomp.json" }
+    - { dest: "/usr/share/containers/containers.conf" }
