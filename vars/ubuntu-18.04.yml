@@ -25,3 +25,7 @@ _apt_repository:
 
 _apt:
   - { state: "latest", name: "containers-common" }
+
+_containers_common_engine_runtime: "crun"
+
+_containers_common_storage_options_overlay_mount_program: ""

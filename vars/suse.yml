@@ -21,3 +21,7 @@ _zypper_repository:
 
 _zypper:
   - { state: "latest", name: "libcontainers-common" }
+
+_containers_common_engine_runtime: "crun"
+
+_containers_common_storage_options_overlay_mount_program: "/usr/bin/fuse-overlayfs"
