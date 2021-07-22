@@ -22,7 +22,7 @@ containers_common_engine_runtime: "{{ _containers_common_engine_runtime }}"
 
 # Cgroup management implementation used for the runtime.
 # Valid options “systemd” or “cgroupfs”
-containers_common_engine_cgroup_manager: "systemd"
+containers_common_engine_cgroup_manager: "{{ _containers_common_engine_cgroup_manager }}"
 
 # Default Storage Driver
 containers_common_storage_driver: "overlay"

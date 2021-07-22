@@ -28,4 +28,6 @@ _apt:
 
 _containers_common_engine_runtime: "crun"
 
+_containers_common_engine_cgroup_manager: "systemd"
+
 _containers_common_storage_options_overlay_mount_program: "/usr/bin/fuse-overlayfs"
