@@ -13,3 +13,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+_zypper_repository:
+  - name: "Virtualization:containers"
+    repo: "https://download.opensuse.org/repositories/Virtualization:/containers/openSUSE_Tumbleweed"
+    state: "present"
+
+_zypper:
+  - { state: "latest", name: "libcontainers-common" }
+
+_containers_common_engine_runtime: "crun"
+
+_containers_common_engine_cgroup_manager: "systemd"
+
+_containers_common_storage_options_overlay_mount_program: "/usr/bin/fuse-overlayfs"

@@ -13,3 +13,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+_apt_key:
+  - url: "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/Release.key"
+    id: "2472D6D0D2F66AF87ABA8DA34D64390375060AA4"
+    state: "present"
+
+_apt_repository:
+  - repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04 /"
+    state: "present"
+
+_apt:
+  - { state: "latest", name: "containers-common" }
+
+_containers_common_engine_runtime: "crun"
+
+_containers_common_engine_cgroup_manager: "systemd"
+
+_containers_common_storage_options_overlay_mount_program: "/usr/bin/fuse-overlayfs"

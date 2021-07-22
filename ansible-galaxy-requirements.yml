@@ -20,6 +20,14 @@ collections:
     version: ">=0.0.0,<1.0.0"
 
 roles:
+  - name: runc
+    src: https://github.com/alvistack/ansible-role-runc
+    version: develop
+
+  - name: crun
+    src: https://github.com/alvistack/ansible-role-crun
+    version: develop
+
   - name: fuse_overlayfs
     src: https://github.com/alvistack/ansible-role-fuse_overlayfs
     version: develop
