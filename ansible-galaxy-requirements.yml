@@ -27,7 +27,3 @@ roles:
   - name: crun
     src: https://github.com/alvistack/ansible-role-crun
     version: develop
-
-  - name: fuse_overlayfs
-    src: https://github.com/alvistack/ansible-role-fuse_overlayfs
-    version: develop
