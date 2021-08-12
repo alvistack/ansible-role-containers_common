@@ -32,10 +32,7 @@ _yum_repository:
 
 _yum:
   - { state: "latest", name: "containers-common" }
-  - { state: "latest", name: "fuse-overlayfs" }
 
 _containers_common_engine_runtime: "crun"
 
 _containers_common_engine_cgroup_manager: "systemd"
-
-_containers_common_storage_options_overlay_mount_program: "/usr/bin/fuse-overlayfs"
