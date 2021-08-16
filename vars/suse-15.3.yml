@@ -22,6 +22,6 @@ _zypper_repository:
 _zypper:
   - { state: "latest", name: "libcontainers-common" }
 
-_containers_common_engine_runtime: "runc"
+_containers_common_engine_runtime: "crun"
 
-_containers_common_engine_cgroup_manager: "cgroupfs"
+_containers_common_engine_cgroup_manager: "systemd"
