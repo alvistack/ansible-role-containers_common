@@ -66,10 +66,10 @@ default_capabilities = [
 
 # A list of sysctls to be set in containers by default,
 # specified as "name=value",
-# for example:"net.ipv4.ping_group_range=0 0".
+# for example:"net.ipv4.ping_group_range = 0 0".
 #
-default_sysctls=[
-    "net.ipv4.ping_group_range=0 0",
+default_sysctls = [
+    "net.ipv4.ping_group_range = 0 0",
 ]
 
 # A list of ulimits to be set in containers by default, specified as
@@ -209,7 +209,7 @@ env = [
 # Path to the seccomp.json profile which is used as the default seccomp profile
 # for the runtime.
 #
-seccomp_profile = "/usr/share/containers/seccomp.json"
+# seccomp_profile = "/usr/share/containers/seccomp.json"
 
 # Size of /dev/shm. Specified as <number><unit>.
 # Unit is optional, values:
@@ -286,7 +286,7 @@ cni_plugin_dirs = [
 
 # Path to the directory where CNI configuration files are located.
 #
-network_config_dir = "/etc/cni/net.d"
+# network_config_dir = "/etc/cni/net.d"
 
 [engine]
 # Index to the active service
@@ -350,9 +350,9 @@ env = [
 
 # Path to OCI hooks directories for automatically executed hooks.
 #
-hooks_dir = [
-    "/usr/share/containers/oci/hooks.d",
-]
+# hooks_dir = [
+#     "/usr/share/containers/oci/hooks.d",
+# ]
 
 # Manifest Type (oci, v2s2, or v2s1) to use when pulling, pushing, building
 # container images. By default image pulled and pushed match the format of the
@@ -371,7 +371,7 @@ hooks_dir = [
 
 # Default command to run the infra container
 #
-infra_command = "/pause"
+# infra_command = "/pause"
 
 # Infra (pause) container image name for pod infra containers.  When running a
 # pod, we start a `pause` process in a container to hold open the namespaces
