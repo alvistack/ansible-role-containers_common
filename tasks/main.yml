@@ -62,7 +62,6 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/containers" }
-    - { dest: "/usr/share/containers" }
 
 - name: copy templates
   template:
@@ -72,8 +71,8 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
+    - { dest: "/etc/containers/containers.conf" }
     - { dest: "/etc/containers/storage.conf" }
-    - { dest: "/usr/share/containers/containers.conf" }
 
 - name: prepare files
   file:
@@ -83,5 +82,5 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
+    - { dest: "/etc/containers/containers.conf" }
     - { dest: "/etc/containers/storage.conf" }
-    - { dest: "/usr/share/containers/containers.conf" }
