@@ -15,13 +15,13 @@
 # limitations under the License.
 
 _zypper_repository:
-  - name: "Virtualization:containers"
-    repo: "https://download.opensuse.org/repositories/Virtualization:/containers/openSUSE_Leap_15.3"
+  - name: "home:alvistack"
+    repo: "http://download.opensuse.org/repositories/home:/alvistack/openSUSE_Leap_15.3"
     state: "present"
 
 _zypper:
-  - { state: "latest", name: "libcontainers-common" }
+  - { state: "latest", name: "containers-common" }
 
-_containers_common_engine_runtime: "runc"
+_containers_common_engine_runtime: "crun"
 
-_containers_common_engine_cgroup_manager: "cgroupfs"
+_containers_common_engine_cgroup_manager: "systemd"
