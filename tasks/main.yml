@@ -62,6 +62,7 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/containers" }
+    - { dest: "/etc/containers/registry.conf.d" }
 
 - name: copy templates
   template:
@@ -73,6 +74,7 @@
   loop:
     - { dest: "/etc/containers/containers.conf" }
     - { dest: "/etc/containers/storage.conf" }
+    - { dest: "/etc/containers/registry.conf.d/00-defaults.conf" }
 
 - name: prepare files
   file:
@@ -84,3 +86,4 @@
   loop:
     - { dest: "/etc/containers/containers.conf" }
     - { dest: "/etc/containers/storage.conf" }
+    - { dest: "/etc/containers/registry.conf.d/00-defaults.conf" }
