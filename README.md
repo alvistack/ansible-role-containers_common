@@ -9,7 +9,7 @@ Ansible Role for Containers Common Configuration Files.
 
 ## Requirements
 
-This role require Ansible community package 4.4 or higher.
+This role require Ansible community package 4.5 or higher.
 
 This role was designed for:
 
