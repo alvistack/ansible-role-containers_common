@@ -1,5 +1,7 @@
 # Ansible Role for Containers Common Configuration Files
 
+<img src="/alvistack.svg" width="75" alt="AlviStack">
+
 [![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-containers_common/master)](https://gitlab.com/alvistack/ansible-role-containers_common/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-containers_common.svg)](https://github.com/alvistack/ansible-role-containers_common/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-containers_common.svg)](https://github.com/alvistack/ansible-role-containers_common/blob/master/LICENSE)
