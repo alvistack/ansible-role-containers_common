@@ -10,10 +10,10 @@
 driver = "{{ containers_common_storage_driver }}"
 
 # Temporary storage location
-runroot = "/run/containers/storage"
+runroot = "{{ containers_common_storage_runroot }}"
 
 # Primary Read/Write location of container storage
-graphroot = "/var/lib/containers/storage"
+graphroot = "{{ containers_common_storage_graphroot }}"
 
 # Storage path for rootless users
 #

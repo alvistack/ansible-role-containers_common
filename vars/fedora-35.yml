@@ -33,6 +33,7 @@ _yum_repository:
 
 _yum:
   - { state: "latest", name: "containers-common" }
+  - { state: "latest", name: "fuse-overlayfs" }
 
 _containers_common_engine_runtime: "crun"
 
