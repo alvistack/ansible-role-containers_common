@@ -17,19 +17,25 @@
 # Used to change the name of the default AppArmor profile of container engine.
 containers_common_containers_apparmor_profile: ""
 
-# Default OCI runtime
+# Default OCI runtime.
 containers_common_engine_runtime: "{{ _containers_common_engine_runtime }}"
 
 # Cgroup management implementation used for the runtime.
-# Valid options “systemd” or “cgroupfs”
+# Valid options "systemd" or "cgroupfs".
 containers_common_engine_cgroup_manager: "{{ _containers_common_engine_cgroup_manager }}"
 
-# Default Storage Driver
+# Default Storage Driver.
 containers_common_storage_driver: "overlay"
 
-# Path to an helper program to use for mounting the file system instead of mounting it
-# directly.
-containers_common_storage_options_overlay_mount_program: ""
+# Temporary storage location.
+containers_common_storage_runroot: "/run/containers/storage"
 
-# mountopt specifies comma separated list of extra mount options
-containers_common_storage_options_overlay_mountopt: ""
+# Primary Read/Write location of container storage.
+containers_common_storage_graphroot: "/var/lib/containers/storage"
+
+# Path to an helper program to use for mounting the file system instead of
+# mounting it directly.
+containers_common_storage_options_overlay_mount_program: "/usr/bin/fuse-overlayfs"
+
+# mountopt specifies comma separated list of extra mount options.
+containers_common_storage_options_overlay_mountopt: "nodev"
