@@ -27,6 +27,7 @@ _apt_repository:
 
 _apt:
   - { state: "latest", name: "containers-common" }
+  - { state: "latest", name: "containers-storage" }
   - { state: "latest", name: "fuse-overlayfs" }
 
 _containers_common_engine_runtime: "crun"
