@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Add `containers-storage`
+  - Add `fuse-overlayfs`
   - Skip package upgrade before running molecule
   - Support Fedora Rawhide
   - Support Debian Testing
