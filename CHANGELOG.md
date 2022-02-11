@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Remove Ubuntu 21.04 support
   - Add `containers-storage`
   - Add `fuse-overlayfs`
   - Skip package upgrade before running molecule
