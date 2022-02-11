@@ -1,9 +1,14 @@
 # Ansible Role for Containers Common Configuration Files
 
-## 5.5.0 - TBC
+## 5.6.0 - TBC
 
 ### Major Changes
 
+## 5.5.0 - 2022-02-11
+
+### Major Changes
+
+  - Remove Ubuntu 21.04 support
   - Add `containers-storage`
   - Add `fuse-overlayfs`
   - Skip package upgrade before running molecule
