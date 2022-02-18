@@ -17,6 +17,10 @@
 # Used to change the name of the default AppArmor profile of container engine.
 containers_common_containers_apparmor_profile: ""
 
+# Network backend determines what network driver will be used to set up
+# and tear down container networks.
+containers_common_network_network_backend: "cni"
+
 # Default OCI runtime.
 containers_common_engine_runtime: "{{ _containers_common_engine_runtime }}"
 
