@@ -205,7 +205,7 @@ env = [
 # Path to the seccomp.json profile which is used as the default seccomp profile
 # for the runtime.
 #
-seccomp_profile = "/usr/share/containers/seccomp.json"
+seccomp_profile = "{{ containers_common_containers_seccomp_profile }}"
 
 # Size of /dev/shm. Specified as <number><unit>.
 # Unit is optional, values:
@@ -270,13 +270,13 @@ network_backend = "{{ containers_common_network_network_backend }}"
 
 # Path to directory where CNI plugin binaries are located.
 #
-cni_plugin_dirs = [
-    "/usr/local/libexec/cni",
-    "/usr/libexec/cni",
-    "/usr/local/lib/cni",
-    "/usr/lib/cni",
-    "/opt/cni/bin",
-]
+# cni_plugin_dirs = [
+#     "/usr/local/libexec/cni",
+#     "/usr/libexec/cni",
+#     "/usr/local/lib/cni",
+#     "/usr/lib/cni",
+#     "/opt/cni/bin",
+# ]
 
 # The network name of the default network to attach pods to.
 #
@@ -295,7 +295,7 @@ cni_plugin_dirs = [
 # For the netavark backend "/etc/containers/networks" is used as root
 # and "$graphroot/networks" as rootless.
 #
-network_config_dir = "/etc/cni/net.d"
+network_config_dir = "{{ containers_common_network_network_config_dir }}"
 
 [engine]
 # Index to the active service
@@ -383,9 +383,9 @@ env = [
 
 # Path to OCI hooks directories for automatically executed hooks.
 #
-hooks_dir = [
-    "/usr/share/containers/oci/hooks.d",
-]
+# hooks_dir = [
+#     "/usr/share/containers/oci/hooks.d",
+# ]
 
 # Manifest Type (oci, v2s2, or v2s1) to use when pulling, pushing, building
 # container images. By default image pulled and pushed match the format of the
@@ -404,7 +404,7 @@ hooks_dir = [
 
 # Default command to run the infra container
 #
-infra_command = "/pause"
+# infra_command = "/pause"
 
 # Infra (pause) container image name for pod infra containers.  When running a
 # pod, we start a `pause` process in a container to hold open the namespaces
@@ -413,7 +413,7 @@ infra_command = "/pause"
 # engines run a builtin container using the pause executable. If you want override
 # specify an image to pull.
 #
-infra_image = ""
+# infra_image = ""
 
 # Specify the locking mechanism to use; valid values are "shm" and "file".
 # Change the default only if you are sure of what you are doing, in general

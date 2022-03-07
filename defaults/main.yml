@@ -17,9 +17,20 @@
 # Used to change the name of the default AppArmor profile of container engine.
 containers_common_containers_apparmor_profile: ""
 
+# Path to the seccomp.json profile which is used as the default seccomp profile
+# for the runtime.
+containers_common_containers_seccomp_profile: "/usr/share/containers/seccomp.json"
+
 # Network backend determines what network driver will be used to set up
 # and tear down container networks.
 containers_common_network_network_backend: "cni"
+
+# Path to the directory where network configuration files are located.
+# For the CNI backend the default is "/etc/cni/net.d" as root
+# and "$HOME/.config/cni/net.d" as rootless.
+# For the netavark backend "/etc/containers/networks" is used as root
+# and "$graphroot/networks" as rootless.
+containers_common_network_network_config_dir: "/etc/cni/net.d"
 
 # Default OCI runtime.
 containers_common_engine_runtime: "{{ _containers_common_engine_runtime }}"
