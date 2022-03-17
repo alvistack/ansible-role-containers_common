@@ -19,10 +19,10 @@
   become: true
   tasks:
     - name: prepare files
-      file:
+      ansible.builtin.file:
         dest: "{{ item.dest }}"
         owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
+        ansible.builtin.group: "{{ item.group | default('root') }}"
         mode: "{{ item.mode | default('0644') }}"
         state: "{{ item.state | default('file') }}"
       loop:
