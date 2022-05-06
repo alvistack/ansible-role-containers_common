@@ -36,6 +36,6 @@ _yum:
   - { state: "latest", name: "containers-storage" }
   - { state: "latest", name: "fuse-overlayfs" }
 
-_containers_common_engine_runtime: "runc"
+_containers_common_engine_runtime: "crun"
 
 _containers_common_engine_cgroup_manager: "cgroupfs"
