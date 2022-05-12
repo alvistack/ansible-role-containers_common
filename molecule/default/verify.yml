@@ -18,12 +18,13 @@
   remote_user: root
   become: true
   tasks:
-    - name: ansible --version
-      ansible.builtin.command: ansible --version
-      register: result
-      changed_when: result is not succeeded
-
-    - name: ansible-lint --version
-      ansible.builtin.command: ansible-lint --version
-      register: result
-      changed_when: result is not succeeded
+    - name: prepare files
+      ansible.builtin.file:
+        dest: "{{ item.dest }}"
+        owner: "{{ item.owner | default('root') }}"
+        group: "{{ item.group | default('root') }}"
+        mode: "{{ item.mode | default('0644') }}"
+        state: "{{ item.state | default('file') }}"
+      loop:
+        - { dest: "/etc/containers/storage.conf" }
+        - { dest: "/usr/share/containers/containers.conf" }
