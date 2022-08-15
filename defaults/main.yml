@@ -21,10 +21,6 @@ containers_common_containers_apparmor_profile: ""
 # for the runtime.
 containers_common_containers_seccomp_profile: "/usr/share/containers/seccomp.json"
 
-# Network backend determines what network driver will be used to set up
-# and tear down container networks.
-containers_common_network_network_backend: "cni"
-
 # Path to the directory where network configuration files are located.
 # For the CNI backend the default is "/etc/cni/net.d" as root
 # and "$HOME/.config/cni/net.d" as rootless.
