@@ -328,7 +328,7 @@ seccomp_profile = "{{ containers_common_containers_seccomp_profile }}"
 # For the netavark backend "/etc/containers/networks" is used as root
 # and "$graphroot/networks" as rootless.
 #
-network_config_dir = "{{ containers_common_network_network_config_dir }}"
+# network_config_dir = "/etc/cni/net.d"
 
 # Port to use for dns forwarding daemon with netavark in rootful bridge
 # mode and dns enabled.

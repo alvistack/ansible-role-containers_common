@@ -21,13 +21,6 @@ containers_common_containers_apparmor_profile: ""
 # for the runtime.
 containers_common_containers_seccomp_profile: "/usr/share/containers/seccomp.json"
 
-# Path to the directory where network configuration files are located.
-# For the CNI backend the default is "/etc/cni/net.d" as root
-# and "$HOME/.config/cni/net.d" as rootless.
-# For the netavark backend "/etc/containers/networks" is used as root
-# and "$graphroot/networks" as rootless.
-containers_common_network_network_config_dir: "/etc/cni/net.d"
-
 # Default OCI runtime.
 containers_common_engine_runtime: "{{ _containers_common_engine_runtime }}"
 
