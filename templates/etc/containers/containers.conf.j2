@@ -285,7 +285,7 @@ seccomp_profile = "{{ containers_common_containers_seccomp_profile }}"
 # Before changing this value all containers must be stopped otherwise it is likely that
 # iptables rules and network interfaces might leak on the host. A reboot will fix this.
 #
-network_backend = "{{ containers_common_network_network_backend }}"
+# network_backend = ""
 
 # Path to directory where CNI plugin binaries are located.
 #
@@ -328,7 +328,7 @@ network_backend = "{{ containers_common_network_network_backend }}"
 # For the netavark backend "/etc/containers/networks" is used as root
 # and "$graphroot/networks" as rootless.
 #
-network_config_dir = "{{ containers_common_network_network_config_dir }}"
+# network_config_dir = "/etc/cni/net.d"
 
 # Port to use for dns forwarding daemon with netavark in rootful bridge
 # mode and dns enabled.
