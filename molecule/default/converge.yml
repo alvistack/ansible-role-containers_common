@@ -22,9 +22,7 @@
     - name: include role
       ansible.builtin.include_role:
         name: alvistack.crun
-      tags: alvistack.crun
 
     - name: include role
       ansible.builtin.include_role:
         name: alvistack.containers_common
-      tags: alvistack.containers_common
