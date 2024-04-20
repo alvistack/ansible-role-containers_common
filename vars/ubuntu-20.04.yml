@@ -32,6 +32,8 @@ _apt:
   - { state: latest, name: passt }
   - { state: latest, name: slirp4netns }
 
+_containers_common_containers_apparmor_profile: ""
+
 _containers_common_engine_runtime: crun
 
 _containers_common_engine_cgroup_manager: systemd
