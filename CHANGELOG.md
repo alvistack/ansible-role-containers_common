@@ -1,6 +1,8 @@
 # Ansible Role for Containers Common Configuration Files
 
-## 11.5.0 - TBC
+## 12.0.0 - TBC
+
+## 11.5.0 - 2025-04-23
 
 - Support Ubuntu 25.04
 
