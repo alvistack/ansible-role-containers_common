@@ -21,12 +21,15 @@ containers_common_containers_apparmor_profile: "{{ _containers_common_containers
 # for the runtime.
 containers_common_containers_seccomp_profile: /usr/share/containers/seccomp.json
 
-# Default OCI runtime.
-containers_common_engine_runtime: "{{ _containers_common_engine_runtime }}"
+# Path to the directory where network configuration files are located.
+containers_common_network_network_config_dir: /etc/containers/networks
 
 # Cgroup management implementation used for the runtime.
 # Valid options "systemd" or "cgroupfs".
 containers_common_engine_cgroup_manager: "{{ _containers_common_engine_cgroup_manager }}"
+
+# Default OCI runtime.
+containers_common_engine_runtime: "{{ _containers_common_engine_runtime }}"
 
 # Default Storage Driver.
 containers_common_storage_driver: overlay
