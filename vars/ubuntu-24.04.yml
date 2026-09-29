@@ -36,6 +36,10 @@ _apt:
   - { state: latest, name: passt }
   - { state: latest, name: slirp4netns }
 
+_containers_common_storage_options_overlay_mount_program: ""
+
+_containers_common_storage_options_overlay_mountopt: "nodev,metacopy=on"
+
 _containers_common_containers_apparmor_profile: unconfined
 
 _containers_common_engine_runtime: crun
